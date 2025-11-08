@@ -8,7 +8,7 @@
   "spacing": 8, // Gaps between modules (8px)
 
   "modules-left": [
-    "custom/launcher",
+//    "custom/launcher",
     "niri/workspaces",
     "cpu",
     "temperature",
