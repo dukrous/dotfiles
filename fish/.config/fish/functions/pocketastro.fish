@@ -1,0 +1,3 @@
+function pocketastro --wraps='cat .creds/pocketastro.password | wlfreerdp /u:dukrous /from-stdin /dynamic-resolution /floatbar /v:pocketastro.local' --wraps='cat .creds/pocketastro.password | wlfreerdp /u:dukrous /from-stdin /dynamic-resolution /floatbar:default:visible,show:always /v:pocketastro.local' --description 'alias pocketastro=cat .creds/pocketastro.password | wlfreerdp /u:dukrous /from-stdin /dynamic-resolution /floatbar:default:visible,show:always /v:pocketastro.local'
+    cat .creds/pocketastro.password | wlfreerdp /u:dukrous /from-stdin /dynamic-resolution /floatbar:default:visible,show:always /v:pocketastro.local $argv
+end
