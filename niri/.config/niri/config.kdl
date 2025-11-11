@@ -1,3 +1,15 @@
+// Startup Apps
+spawn-at-startup "headsetkontrol"
+spawn-at-startup "1password" "--silent"
+spawn-at-startup "arch-update" "--tray"
+spawn-at-startup "zapzap" "--hideStart"
+spawn-at-startup "discord" "--start-minimized"
+spawn-at-startup "gearlever" "--fetch-updates"
+spawn-at-startup "openlinkhub_tray"
+spawn-at-startup "steam" "-silent"
+spawn-at-startup "syncthingtray-qt6" "qt-widgets-gui" "--single-instance" "--wait"
+
+// Niri Utilities
 spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
 spawn-at-startup "/usr/lib/xdg-desktop-portal-kde"
 spawn-at-startup "xwayland-satellite"
@@ -6,23 +18,30 @@ spawn-at-startup "waypaper" "--restore"
 spawn-at-startup "swaync"
 spawn-at-startup "swayidle" "-w"
 
+// Enable saving screenshots
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
+// Need two main workspaces
 workspace "main"
 workspace "games"
 
+// Remove client-side decorations
 prefer-no-csd
 
+// Set environment variables
 environment {
     BROWSER "zen-browser"
     DISPLAY ":1"
     QT_QPA_PLATFORM "wayland"
 }
 
+// Don't show the hotkey overlay on startup & remove unbound commands
 hotkey-overlay {
     skip-at-startup
+    hide-not-bound
 }
 
+// Set cursor theme
 cursor {
     xcursor-theme "catppuccin-mocha-light-cursors"
     xcursor-size 30 
@@ -30,6 +49,7 @@ cursor {
     hide-when-typing
 }
 
+// Setup keyboard, mouse, and touchpad
 input {
     keyboard {
         xkb {
@@ -58,6 +78,7 @@ input {
     focus-follows-mouse max-scroll-amount="100%"
 }
 
+// Configure main monitor
 output "Dell Inc. DELL U3421WE 2Q2V653" {
     mode "3440x1440@59.973"
     scale 1
@@ -66,6 +87,7 @@ output "Dell Inc. DELL U3421WE 2Q2V653" {
     focus-at-startup
 }
 
+// Setup layout
 layout {
     gaps 7
     center-focused-column "never"
@@ -104,17 +126,19 @@ layout {
     }
 }
 
+// Laptop power handling
 switch-events {
     lid-close {spawn "hyprlock";}
 }
 
+// Default window rules
 window-rule {
     geometry-corner-radius 8
     clip-to-geometry true
     opacity 0.95
 }
 
-
+// Make terminal windows with a clock floating and small
 window-rule {
     match app-id=r#"kitty$"# title="^tty-clock$"
 
@@ -126,6 +150,7 @@ window-rule {
     opacity 0.97
 }
 
+// Make other terminal windows 40% wide and allow tabs
 window-rule {
     match app-id=r#"kitty$"#
 
@@ -133,6 +158,7 @@ window-rule {
     default-column-width { proportion 0.4; }
 }
 
+// Apps below are default floating
 window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     match app-id=r#"firefox$"# title="^Library$"
@@ -142,11 +168,13 @@ window-rule {
     match app-id=r#"libresprite$"#
     match app-id=r#"waypaper$"#
     match app-id=r#"Audacity$"#
+    match app-id=r#"wlfreerdp$"#
 
     open-floating true
     opacity 1.0
 }
 
+// Apps below are never transparent
 window-rule {
     match app-id=r#"firefox$"#
     match app-id=r#"zen$"#
@@ -158,6 +186,7 @@ window-rule {
     opacity 1.0
 }
 
+// Steam notifications should float in bottom right corner & not pull focus
 window-rule {
     match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
     default-floating-position x=10 y=10 relative-to="bottom-right"
@@ -165,12 +194,14 @@ window-rule {
     open-focused false
 }
 
+// OBS Studio has a min-width to preserve UI
 window-rule {
     match app-id=r#"^com\.obsproject\.Studio$"#
 
     min-width 876
 }
 
+// Open Steam on any monitor
 window-rule {
     match app-id="steam"
     exclude title=r#"^notificationtoasts_\d+_desktop$"#
@@ -180,6 +211,7 @@ window-rule {
     opacity 1.0
 }
 
+// Put all games in the Games workspace
 window-rule {
     match app-id="steam_app_default"
     match app-id="battle.net.exe"
@@ -189,6 +221,7 @@ window-rule {
     opacity 1.0
 }
 
+// Secure apps should not be captures in screenshots or screencasting, and border is red
 window-rule {
     match app-id="1Password"
     block-out-from "screen-capture"
@@ -204,6 +237,7 @@ gestures {
     }
 }
 
+// All binds below
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 

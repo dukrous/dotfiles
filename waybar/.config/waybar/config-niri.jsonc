@@ -55,6 +55,7 @@
     "tooltip-format": "{app_id}"
   },
   "niri/window": {
+//    "format": "{title} | {app_id}",
     "tooltip": false
   },
   "clock": {
